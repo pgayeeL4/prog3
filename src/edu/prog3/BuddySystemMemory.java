@@ -6,6 +6,4 @@ package edu.prog3;
  */
 public class BuddySystemMemory {
 
-
-
 }
