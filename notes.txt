@@ -1,0 +1,60 @@
+OS Program 3 Notes:
+Linked lists denoting powers of two, between ASIZE and MSIZE, inclusive
+MSIZE will never be higher tha 2^32
+One list per possible block
+each list entry denotes an unused block of memory
+
+EX:
+smallest allocation is 128 bytes, total 1024 bytes of memory
+4 lists:
+	128
+	256
+	512
+	1024
+At beginning, all lists are empty, save for list of 1024, 
+which has a single block starting at address 0
+
+When a request for allocation occurs, round up to next power of 2
+	ex 200->256
+find first free block that can hold 256, only 1024 is available.
+	This is far larger than needed, so split into two 512 blocks(one at 0, another at 512)
+	place entry for location 512 into list of 512s, split address 0 again(one at 0, another at 256)
+	block at 256 is now places into list of 256s, address 0 size 256 is used to fulfill request
+	NOTE: We always assign the one with the smaller address
+
+If request cannot be fulfilled(no blocks big enough avaialble) then it's placed on the deferred request list
+	this is a linked list of requests
+
+For deallocation
+	Find buddy: If edu.prog3.Model.Block B has address A and size K, compute A/K
+		if A/K is even, then buddy addr is A+K; otherwise A-K
+		examine list of Ks to find block with buddy address
+			if NOT found, then entry for B is addedd to list of Ks
+			otherwise, remove buddy from list, and join with B to create larger B' with size 2K and address min(B, BBuddy)
+				continue as if you were trying to remove B'. guaranteed to terminate
+	Once deallocation is done, check if any deferred requests can be completed, FIFO.
+	
+	
+STRUCTURE OF DATA:
+
+n number of linked lists
+where n = log2(MSIZE) - log2(ASIZE) + 1
+
+Arraylist(or just array?) of Linked Lists
+Linked lists are lists of blocks, index in Arraylist tells you the block size(idx0 = 2^0=1, idx2 = 2^2=4, etc)
+		MAYBE NOT: You cannot go below ASIZE or above MSIZE, plus n isn't consistent with the above
+		Each list is BlockList, which has the size of blocks in it?
+		Index could still work, just need to limit min and max index
+
+linked list for deferred allocation requests
+list of existing allocations
+
+Allocation: id, address, size
+
+Block: address, size
+	static findBuddy()
+
+Request: ABSTRACT, id
+		DeallocationRequest
+		AllocationRequest: size
+
