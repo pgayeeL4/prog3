@@ -1,8 +1,9 @@
 package edu.prog3;
 
 import edu.prog3.Helper.MinMaxList;
-import edu.prog3.Model.Block;
+import edu.prog3.Model.*;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -16,10 +17,40 @@ import java.util.LinkedList;
  */
 public class BuddySystemMemory {
 
-    MinMaxList<LinkedList<Block>> memory;
+    //TODO make this work
 
+    //represents our "memory" of free Blocks
+    private MinMaxList<LinkedList<Block>> freeBlocks;
+
+    //queue of deferred requests
+    LinkedList<AllocationRequest> deferredRequests = new LinkedList<>();
+
+    //set of existing allocations
+    HashSet<Allocation> existingAllocations = new HashSet<>();
+
+    //initializes the initial list of block lists and the starting free block
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
-        this.memory = new MinMaxList<>(minBlockSize, maxBlockSize);
+        this.freeBlocks = new MinMaxList<>(getIndex(minBlockSize), getIndex(maxBlockSize));
+        this.freeBlocks.get(getIndex(maxBlockSize)).add(new Block(maxBlockSize, 0));
+    }
+
+    public void allocate(AllocationRequest request) {
+        //TODO implement allocation
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    public void deallocate(DeallocationRequest request) {
+        //TODO implement deallocation
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    /**
+     * takes in a size(of power 2) and gives back the appropriate index for the block's list
+     * @param size size of the block
+     * @return index of the block's list
+     */
+    public static int getIndex(int size) {
+        return (int)(Math.log(size)/Math.log(2));
     }
 
 }

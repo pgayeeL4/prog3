@@ -17,10 +17,10 @@ public class MinMaxList<T> extends ArrayList<T> {
     private int minIndex;
     private int maxIndex;
 
-    public MinMaxList(int min, int max) {
-        super(max); //capacity of this list, not necessarily the minimum amount of accessible elements
-        this.minIndex = min;
-        this.maxIndex = max;
+    public MinMaxList(int minIdx, int maxIdx) {
+        super(maxIdx); //capacity of this list, not necessarily the minimum amount of accessible elements
+        this.minIndex = minIdx;
+        this.maxIndex = maxIdx;
     }
 
     public T get(int index) {
