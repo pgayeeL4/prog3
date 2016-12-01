@@ -47,7 +47,7 @@ Linked lists are lists of blocks, index in Arraylist tells you the block size(id
 		Index could still work, just need to limit min and max index
 
 linked list for deferred allocation requests
-list of existing allocations
+list of existing allocations(a queue, probably?)
 
 Allocation: id, address, size
 

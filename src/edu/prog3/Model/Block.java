@@ -1,7 +1,6 @@
 package edu.prog3.Model;
 
 /**
- * Created by Pratik on 12/1/2016
  * represents a block of memory, with address and size
  */
 public class Block {

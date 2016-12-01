@@ -3,7 +3,6 @@ package edu.prog3.Helper;
 import java.util.ArrayList;
 
 /**
- * Created by Pratik on 12/1/2016
  * essentially, this is a list that restricts the possible indexes between bounds
  * Should override all access/add/removal methods from ArrayList
  *

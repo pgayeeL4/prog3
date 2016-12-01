@@ -1,7 +1,6 @@
 package edu.prog3.Model;
 
 /**
- * Created by Pratik on 12/1/2016
  * represents a current allocation, with id, size, and address
  *
  * This is an allocation that has happened, it is NOT an allocation request
