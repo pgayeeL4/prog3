@@ -1,6 +1,6 @@
 package edu.prog3;
 
-import edu.prog3.Helper.MinMaxList;
+import edu.prog3.Helper.BoundedList;
 import edu.prog3.Model.*;
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class BuddySystemMemory {
     //TODO make this work
 
     //represents our "memory" of free Blocks
-    private MinMaxList<LinkedList<Block>> freeBlocks;
+    private BoundedList<LinkedList<Block>> freeBlocks;
 
     //queue of deferred requests
     LinkedList<AllocationRequest> deferredRequests = new LinkedList<>();
@@ -30,7 +30,7 @@ public class BuddySystemMemory {
 
     //initializes the initial list of block lists and the starting free block
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
-        this.freeBlocks = new MinMaxList<>(getIndex(minBlockSize), getIndex(maxBlockSize));
+        this.freeBlocks = new BoundedList<>(getIndex(minBlockSize), getIndex(maxBlockSize));
         this.freeBlocks.get(getIndex(maxBlockSize)).add(new Block(maxBlockSize, 0));
     }
 

@@ -10,14 +10,14 @@ import java.util.ArrayList;
  *  So, the list of blocks with size 2^i is located at index i in this list
  *  there is a min and max block size, and sizes are in increments of 2^n
  */
-public class MinMaxList<T> extends ArrayList<T> {
+public class BoundedList<T> extends ArrayList<T> {
 
     //Optional TODO: This could really be improved for better space efficiency, or just plain re-written to be less jank
 
     private int minIndex;
     private int maxIndex;
 
-    public MinMaxList(int minIdx, int maxIdx) {
+    public BoundedList(int minIdx, int maxIdx) {
         super(maxIdx); //capacity of this list, not necessarily the minimum amount of accessible elements
         this.minIndex = minIdx;
         this.maxIndex = maxIdx;
