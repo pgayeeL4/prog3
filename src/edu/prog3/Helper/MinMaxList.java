@@ -5,6 +5,9 @@ import java.util.ArrayList;
 /**
  * Created by Pratik on 12/1/2016
  * essentially, this is a list that restricts the possible indexes between bounds
+ *
+ * Expected Use: In this project, each index i represents the size of the blocks in the list element.
+ *  So, the list of blocks with size 2^i is located at index i in this list
  */
 public class MinMaxList<T> extends ArrayList<T> {
 
