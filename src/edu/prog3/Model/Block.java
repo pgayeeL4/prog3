@@ -14,6 +14,10 @@ public class Block {
         this.address = newAddress;
     }
 
+    /**
+     * finds the buddy of this block, as per assignment requirements
+     * @return the address of the buddy
+     */
     public int findBuddyAddress() {
         if((this.address/this.size % 2) == 0) {
             return address+size;
