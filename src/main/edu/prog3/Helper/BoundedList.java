@@ -31,10 +31,6 @@ public class BoundedList<T> extends ArrayList<T> {
         }
     }
 
-    public boolean add(T element) {
-        return super.add(element);
-    }
-
     public void add(int index, T element) {
         if(index < minIndex || index > maxIndex) {
             throw new ArrayIndexOutOfBoundsException("Tried to add to index out of min and max bounds");
