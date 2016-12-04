@@ -21,6 +21,12 @@ public class BoundedList<T> extends ArrayList<T> {
         super(maxIdx); //capacity of this list, not necessarily the minimum amount of accessible elements
         this.minIndex = minIdx;
         this.maxIndex = maxIdx;
+
+        //initialize elements up to maximum index with null
+        //this makes the size consistent with the capacity
+        for(int i=0; i<=maxIdx; i++) {
+            super.add(null);
+        }
     }
 
     public T get(int index) {
@@ -31,10 +37,14 @@ public class BoundedList<T> extends ArrayList<T> {
         }
     }
 
+    @Override
+    @Deprecated
     public boolean add(T element) {
         throw new UnsupportedOperationException("Cannot add to a Bounded List, use set instead");
     }
 
+    @Override
+    @Deprecated
     public void add(int index, T element) {
         throw new UnsupportedOperationException("Cannot add to a Bounded List, use set instead");
     }
@@ -47,10 +57,14 @@ public class BoundedList<T> extends ArrayList<T> {
         }
     }
 
+    @Override
+    @Deprecated
     public T remove(int index) {
         throw new UnsupportedOperationException("Remove not supported for Bounded List");
     }
 
+    @Override
+    @Deprecated
     public boolean remove(Object obj) {
         throw new UnsupportedOperationException("Remove not supported for Bounded List");
     }
