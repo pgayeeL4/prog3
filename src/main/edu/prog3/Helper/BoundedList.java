@@ -31,12 +31,12 @@ public class BoundedList<T> extends ArrayList<T> {
         }
     }
 
+    public boolean add(T element) {
+        throw new UnsupportedOperationException("Cannot add to a Bounded List, use set instead");
+    }
+
     public void add(int index, T element) {
-        if(index < minIndex || index > maxIndex) {
-            throw new ArrayIndexOutOfBoundsException("Tried to add to index out of min and max bounds");
-        } else {
-            super.add(index, element);
-        }
+        throw new UnsupportedOperationException("Cannot add to a Bounded List, use set instead");
     }
 
     public T set(int index, T element) {
@@ -48,11 +48,11 @@ public class BoundedList<T> extends ArrayList<T> {
     }
 
     public T remove(int index) {
-        if(index < minIndex || index > maxIndex) {
-            throw new ArrayIndexOutOfBoundsException("Tried to remove at index out of min and max bounds");
-        } else {
-            return super.remove(index);
-        }
+        throw new UnsupportedOperationException("Remove not supported for Bounded List");
+    }
+
+    public boolean remove(Object obj) {
+        throw new UnsupportedOperationException("Remove not supported for Bounded List");
     }
 
     public int getMinIndex() {
