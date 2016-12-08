@@ -8,25 +8,24 @@ package edu.prog3.Model;
 public class Allocation {
 
     private int id;
-    private int size;
-    private int address;
+    private Block block;
 
     public Allocation(int newId, int newSize, int newAddress) {
         this.id = newId;
-        this.size = newSize;
-        this.address = newAddress;
+        this.block = new Block(newSize, newAddress);
     }
 
-    public int getAddress() {
-        return address;
+    public Allocation(int newId, Block newBlock) {
+        this.id = newId;
+        this.block = newBlock;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public int getSize() {
-        return size;
+    public Block getBlock() {
+        return this.block;
     }
 
 }

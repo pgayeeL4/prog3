@@ -17,7 +17,7 @@ public class Prog3 {
 
     public static void main(String[] args) {
 
-        File inputFile = new File(args[1]);
+        File inputFile = new File(args[0]);
         int msize;
         int asize;
 
