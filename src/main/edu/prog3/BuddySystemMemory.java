@@ -30,9 +30,18 @@ public class BuddySystemMemory {
 
     public boolean allocate(AllocationRequest request) {
         //TODO implement allocation
+        int k = nextPowerTwo(request.getSize());
 
-        throw new UnsupportedOperationException("Not implemented yet");
+        if(freeBlocks.containsKey(k)) {
+            LinkedList<Block> freeList = freeBlocks.get(k);
 
+            for (Block theBlock : freeList) {
+
+            }
+//            freeBlocks.remove(k);
+        }
+
+        return false;
     }
 
     public void checkDeferredList(){
@@ -54,17 +63,16 @@ public class BuddySystemMemory {
         LinkedList<Block> list = freeBlocks.get(listID);
         for(Block freeBlock : list){ // check freeBlock list
             if(freeBlock.getAddress() == buddyAddress){ //if buddy address is the same as free block
-                Block mergedBlock = new Block(allocBlock.getSize()*2, (allocBlock.getAddress()<buddyAddress?allocBlock.getAddress():buddyAddress) );
+                Block mergedBlock = new Block(allocBlock.getSize()*2, (allocBlock.getAddress() < buddyAddress ? allocBlock.getAddress() : buddyAddress) );
               list.remove(freeBlock);
                 break;
             }
             else{ //not found
-                Block bjuddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
+                Block buddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
                 list.add(buddyBlock);
             }
         }
 
-        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     /**
