@@ -3,6 +3,7 @@ package edu.prog3;
 import edu.prog3.Helper.BoundedList;
 import edu.prog3.Model.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -26,7 +27,7 @@ public class BuddySystemMemory {
     LinkedList<AllocationRequest> deferredRequests = new LinkedList<>();
 
     //set of existing allocations
-    HashSet<Allocation> existingAllocations = new HashSet<>();
+    HashMap<Integer, Allocation> existingAllocations = new HashMap<>();
 
     //initializes the initial list of block lists and the starting free block
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
