@@ -35,13 +35,28 @@ public class BuddySystemMemory {
         this.freeBlocks.get(findList(maxBlockSize)).add(new Block(maxBlockSize, 0));
     }
 
-    public void allocate(AllocationRequest request) {
+    public boolean allocate(AllocationRequest request) {
         //TODO implement allocation
+
         throw new UnsupportedOperationException("Not implemented yet");
+
+    }
+
+    public void checkDeferredList(){
+        for(AllocationRequest defRequest : deferredRequests) {
+            if (allocate(defRequest)) {//check deferred list
+                deferredRequests.remove(defRequest);
+            }
+        }
     }
 
     public void deallocate(DeallocationRequest request) {
         //TODO implement deallocation
+        Allocation allocatedMem = existingAllocations.get(request.getId()); //getting allocation
+        int memSize = allocatedMem.getSize(); // get
+        int listID = findList(memSize); //get list ID for list that has the same size blocks as allocated memory
+        LinkedList<Block> list = freeBlocks.get(listID);
+
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
