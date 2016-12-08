@@ -1,27 +1,22 @@
 package edu.prog3;
 
-import edu.prog3.Helper.BoundedList;
 import edu.prog3.Model.*;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
  * represents the whole memory system
  * will have the list of blocks
  * handles adding, removing, allocation, de-allocation, etc
- *
- * Expected Use for BoundedList: In this project, each index i represents the size of the blocks in the list element.
- *  So, the list of blocks with size 2^i is located at index i in this list
- *  there is a min and max block size, and sizes are in increments of 2^n
  */
 public class BuddySystemMemory {
 
     //TODO make this work
 
     //represents our "memory" of free Blocks
-    private BoundedList<LinkedList<Block>> freeBlocks;
+    //key is size, values are the list of blocks
+    private HashMap<Integer, LinkedList<Block>> freeBlocks = new HashMap<>();
 
     //queue of deferred requests
     LinkedList<AllocationRequest> deferredRequests = new LinkedList<>();
@@ -29,10 +24,8 @@ public class BuddySystemMemory {
     //set of existing allocations
     HashMap<Integer, Allocation> existingAllocations = new HashMap<>();
 
-    //initializes the initial list of block lists and the starting free block
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
-        this.freeBlocks = new BoundedList<>(findList(minBlockSize), findList(maxBlockSize));
-        this.freeBlocks.get(findList(maxBlockSize)).add(new Block(maxBlockSize, 0));
+        initLists(minBlockSize, maxBlockSize);
     }
 
     public boolean allocate(AllocationRequest request) {
@@ -81,6 +74,32 @@ public class BuddySystemMemory {
      */
     public static int findList(int size) {
         return (int)(Math.log(size)/Math.log(2));
+    }
+
+    public static int nextPowerTwo(int x) {
+        int k = x;
+
+        //If not a power of 2, round up to the nearest power of 2
+        if(!((k > 0) && ((k & (k - 1)) == 0))) {
+            k = (int)Math.ceil(Math.log(k)/Math.log(2));
+        }
+        return (int)Math.pow(2, k);
+    }
+
+    /**
+     *
+     * @param min
+     * @param max
+     */
+    private void initLists(int min, int max) {
+        int startPow = findList(min);
+        int endPow = findList(max);
+
+        for(int i = startPow; i <= endPow; i++) {
+            System.out.println("current is: " + Math.pow(2, i));
+            this.freeBlocks.put((int)Math.pow(2, i), new LinkedList<Block>());
+        }
+        this.freeBlocks.get(max).add(new Block(max, 0));
     }
 
 }
