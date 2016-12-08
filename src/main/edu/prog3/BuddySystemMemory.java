@@ -66,7 +66,7 @@ public class BuddySystemMemory {
                 break;
             }
             else{ //not found
-                Block buddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
+                Block bjuddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
                 list.add(buddyBlock);
             }
         }
