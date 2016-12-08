@@ -25,9 +25,7 @@ public class BuddySystemMemory {
     HashMap<Integer, Allocation> existingAllocations = new HashMap<>();
 
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
-        LinkedList<Block> temp = new LinkedList<>();
-        temp.add(new Block(maxBlockSize, 0));
-        this.freeBlocks.put(maxBlockSize, temp);
+        initLists(minBlockSize, maxBlockSize);
     }
 
     public void allocate(AllocationRequest request) {
@@ -57,6 +55,22 @@ public class BuddySystemMemory {
             k = (int)Math.ceil(Math.log(k)/Math.log(2));
         }
         return (int)Math.pow(2, k);
+    }
+
+    /**
+     *
+     * @param min
+     * @param max
+     */
+    private void initLists(int min, int max) {
+        int startPow = findList(min);
+        int endPow = findList(max);
+
+        for(int i = startPow; i <= endPow; i++) {
+            System.out.println("current is: " + Math.pow(2, i));
+            this.freeBlocks.put((int)Math.pow(2, i), new LinkedList<Block>());
+        }
+        this.freeBlocks.get(max).add(new Block(max, 0));
     }
 
 }
