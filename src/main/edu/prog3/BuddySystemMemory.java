@@ -3,7 +3,7 @@ package edu.prog3;
 import edu.prog3.Helper.BoundedList;
 import edu.prog3.Model.*;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -26,7 +26,7 @@ public class BuddySystemMemory {
     LinkedList<AllocationRequest> deferredRequests = new LinkedList<>();
 
     //set of existing allocations
-    HashSet<Allocation> existingAllocations = new HashSet<>();
+    HashMap<Integer, Allocation> existingAllocations = new HashMap<>();
 
     //initializes the initial list of block lists and the starting free block
     public BuddySystemMemory(int minBlockSize, int maxBlockSize) {
@@ -36,7 +36,14 @@ public class BuddySystemMemory {
 
     public void allocate(AllocationRequest request) {
         //TODO implement allocation
-        throw new UnsupportedOperationException("Not implemented yet");
+        int k = request.getSize();
+
+        //If not a power of 2, round up to the nearest power of 2
+        if(!((k > 0) && ((k & (k - 1)) == 0))) {
+            k = (int)Math.ceil(Math.log(k)/Math.log(2));
+        }
+        //If block of size k is available, remove block with smallest address and satisfy request
+
     }
 
     public void deallocate(DeallocationRequest request) {
