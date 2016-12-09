@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Created by Pratik on 12/7/2016.
+ * Pratik Gayee pgayee
+ * Jonathan Hale jonathanhale
+ * Stephanie Akapkoun sakpakoun
  */
 public class Prog3 {
 

@@ -1,6 +1,11 @@
 package edu.prog3.Model;
 
 /**
+ *
+ * Pratik Gayee pgayee
+ * Jonathan Hale jonathanhale
+ * Stephanie Akapkoun sakpakoun
+ *
  * represents a current allocation, with id, size, and address
  *
  * This is an allocation that has happened, it is NOT an allocation request

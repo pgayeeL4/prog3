@@ -1,6 +1,11 @@
 package edu.prog3.Model;
 
 /**
+ * 
+ * Pratik Gayee pgayee
+ * Jonathan Hale jonathanhale
+ * Stephanie Akapkoun sakpakoun
+ *
  * a base request, has an ID.
  *
  * All requests should be of subtypes Allocation or Deallocation, not plain Requests

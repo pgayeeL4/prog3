@@ -1,6 +1,11 @@
 package edu.prog3.Model;
 
 /**
+ *
+ * Pratik Gayee pgayee
+ * Jonathan Hale jonathanhale
+ * Stephanie Akapkoun sakpakoun
+ *
  * represents a block of memory, with address and size
  */
 public class Block {

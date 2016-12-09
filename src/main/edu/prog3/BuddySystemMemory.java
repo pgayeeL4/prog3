@@ -10,6 +10,10 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * Pratik Gayee pgayee
+ * Jonathan Hale jonathanhale
+ * Stephanie Akapkoun sakpakoun
+ *
  * represents the whole memory system
  * will have the list of blocks
  * handles adding, removing, allocation, de-allocation, etc
