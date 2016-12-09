@@ -2,7 +2,6 @@ package edu.prog3;
 
 import edu.prog3.Model.AllocationRequest;
 import edu.prog3.Model.DeallocationRequest;
-import edu.prog3.Model.Request;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +16,7 @@ public class Prog3 {
 
     public static void main(String[] args) {
 
-        File inputFile = new File("prog3.input1");
+        File inputFile = new File(args[0]);
         int msize;
         int asize;
 
