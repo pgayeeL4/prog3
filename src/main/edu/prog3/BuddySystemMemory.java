@@ -28,26 +28,21 @@ public class BuddySystemMemory {
         initLists(minBlockSize, maxBlockSize);
     }
 
-    public boolean allocate(AllocationRequest request) {
+    public boolean allocate(AllocationRequest request, boolean deferred) {
         //TODO implement allocation
-        int k = nextPowerTwo(request.getSize());
-
-        if(freeBlocks.containsKey(k)) {
-            LinkedList<Block> freeList = freeBlocks.get(k);
-
-            for (Block theBlock : freeList) {
-
-            }
-//            freeBlocks.remove(k);
-        }
-
+        
         return false;
     }
 
     public void checkDeferredList(){
         for(AllocationRequest defRequest : deferredRequests) {
-            if (allocate(defRequest)) {//check deferred list
+            if (allocate(defRequest, true)) {
+                //check deferred list
                 deferredRequests.remove(defRequest);
+                System.out.println("Deferred Request with ID " + defRequest.getId() + " allocated; addr = " +
+                                    existingAllocations.get(defRequest.getId())
+                                                        .getBlock()
+                                                        .getAddress());
             }
         }
     }
@@ -57,9 +52,13 @@ public class BuddySystemMemory {
         Block allocBlock = allocatedMem.getBlock(); // get block
         existingAllocations.remove(allocatedMem);//remove allocated memory from allocatedList
 
-           deallocateBuddy(allocBlock);
+        deallocateBuddy(allocBlock);
 
-        throw new UnsupportedOperationException("Not implemented yet");
+        System.out.println("Deallocated Allocation with ID: " + request.getId());
+        System.out.println("Deallocated Block at address: " + allocBlock.getAddress() +
+                "and size: " + allocBlock.getSize());
+
+        checkDeferredList();
     }
 
     /**
@@ -69,14 +68,17 @@ public class BuddySystemMemory {
      */
     public void deallocateBuddy(Block allocBlock){
         int buddyAddress = allocBlock.findBuddyAddress();
-        int listID = findList(allocBlock.getSize()); //get list ID for list that has the same size blocks as allocated memory
+        int listID = allocBlock.getSize(); //get list ID for list that has the same size blocks as allocated memory
 
         LinkedList<Block> list = freeBlocks.get(listID);
-        for(Block freeBlock : list){ // check freeBlock list
+        for(Block freeBlock : list){
+            // check freeBlock list
             if(freeBlock.getAddress() == buddyAddress){ //if buddy address is the same as free block
-                Block mergedBlock = new Block(allocBlock.getSize()*2, (allocBlock.getAddress()<buddyAddress?allocBlock.getAddress():buddyAddress) );
+                Block mergedBlock = new Block(allocBlock.getSize()*2,
+                        ((allocBlock.getAddress() < buddyAddress)?allocBlock.getAddress():buddyAddress) );
                 list.remove(freeBlock);
                 deallocateBuddy(mergedBlock);
+                break;
             }
             else{ //not found
                 Block buddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
@@ -84,6 +86,7 @@ public class BuddySystemMemory {
                 break;
             }
         }
+        return;
     }
 
     /**
