@@ -17,7 +17,7 @@ public class Prog3 {
 
     public static void main(String[] args) {
 
-        File inputFile = new File(args[0]);
+        File inputFile = new File("prog3.input1");
         int msize;
         int asize;
 
@@ -39,9 +39,11 @@ public class Prog3 {
 
                 if(line[1].equals("+")) {
                     aRequest = new AllocationRequest(Integer.parseInt(line[0]), Integer.parseInt(line[2]));
-                    memory.allocate(aRequest);
+                    System.out.println("Request ID " + aRequest.getId() + " : allocate " + aRequest.getSize() + " bytes.");
+                    memory.allocate(aRequest, false);
                 } else if(line[1].equals("-")) {
                     dRequest = new DeallocationRequest(Integer.parseInt(line[0]));
+                    System.out.println("Request ID " + dRequest.getId() + " : deallocate");
                     memory.deallocate(dRequest);
                 }
             }
