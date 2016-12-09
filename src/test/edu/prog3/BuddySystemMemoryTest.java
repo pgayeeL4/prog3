@@ -32,6 +32,8 @@ public class BuddySystemMemoryTest {
         assertEquals(128, BuddySystemMemory.nextPowerTwo(127));
         assertEquals(256, BuddySystemMemory.nextPowerTwo(250));
         assertEquals(1024, BuddySystemMemory.nextPowerTwo(900));
+        assertEquals(128, BuddySystemMemory.nextPowerTwo(128));
+        assertEquals(128, BuddySystemMemory.nextPowerTwo(63));
 
     }
 
