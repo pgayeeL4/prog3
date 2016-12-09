@@ -57,22 +57,33 @@ public class BuddySystemMemory {
         Block allocBlock = allocatedMem.getBlock(); // get block
         existingAllocations.remove(allocatedMem);//remove allocated memory from allocatedList
 
+           deallocateBuddy(allocBlock);
+
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    /**
+     * If buddy is found, recursively merge blocks
+     * Else
+     *
+     */
+    public void deallocateBuddy(Block allocBlock){
         int buddyAddress = allocBlock.findBuddyAddress();
         int listID = findList(allocBlock.getSize()); //get list ID for list that has the same size blocks as allocated memory
 
         LinkedList<Block> list = freeBlocks.get(listID);
         for(Block freeBlock : list){ // check freeBlock list
             if(freeBlock.getAddress() == buddyAddress){ //if buddy address is the same as free block
-                Block mergedBlock = new Block(allocBlock.getSize()*2, (allocBlock.getAddress() < buddyAddress ? allocBlock.getAddress() : buddyAddress) );
-              list.remove(freeBlock);
-                break;
+                Block mergedBlock = new Block(allocBlock.getSize()*2, (allocBlock.getAddress()<buddyAddress?allocBlock.getAddress():buddyAddress) );
+                list.remove(freeBlock);
+                deallocateBuddy(mergedBlock);
             }
             else{ //not found
                 Block buddyBlock = new Block(allocBlock.getSize(), buddyAddress); //add entry for allocBlock buddy
                 list.add(buddyBlock);
+                break;
             }
         }
-
     }
 
     /**
